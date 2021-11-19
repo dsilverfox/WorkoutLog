@@ -9,13 +9,15 @@ app.use(require("./middleware/headers"));
 
 //Database Authentication
 try {
-    dbConnection.authenticate()
-    .then(async () => await dbConnection.sync())
-    .then(() => {
+    dbConnection
+      .authenticate()
+      .then(async () => await dbConnection.sync())
+    //   .then(async () => await dbConnection.sync({ force: true }))
+      .then(() => {
         app.listen(process.env.PORT, () => {
-            console.log(`[SERVER] App is listening on ${process.env.PORT}`)
-        })
-    })
+          console.log(`[SERVER] App is listening on ${process.env.PORT}`);
+        });
+      });
 } catch (err) {
     console.log(`[SERVER] Server crashed!`)
 }
